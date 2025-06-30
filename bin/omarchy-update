@@ -1,6 +1,33 @@
 #!/bin/bash
 
+set -e
+
 cd ~/.local/share/omarchy
-# git pull
+
+if [[ $1 == "all" ]]; then
+  # Run all migrations
+  last_updated_at=1
+else
+  # Remember the version we're at before upgrading
+  last_updated_at=$(git log -1 --format=%cd --date=unix)
+fi
+
+# Get the latest
+git switch master
+git pull
 git fetch upstream
-cd -
+git merge upstream/master
+
+# Run any pending migrations
+for file in migrations/*.sh; do
+  filename=$(basename "$file")
+  migrate_at="${filename%.sh}"
+
+  if [ $migrate_at -gt $last_updated_at ]; then
+    echo "Running migration ($migrate_at)"
+    source $file
+  fi
+done
+
+# Back to where we came from
+cd - >/dev/null
