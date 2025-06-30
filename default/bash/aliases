@@ -29,6 +29,9 @@ alias n='nvim'
 alias g='git'
 alias d='docker'
 alias r='rails'
+alias wgup='wg-quick up us-atl-wg-001'
+alias wgdown='wg-quick down us-atl-wg-001'
+
 
 # Git
 alias gcm='git commit -m'

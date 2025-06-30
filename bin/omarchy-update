@@ -1,5 +1,6 @@
 #!/bin/bash
 
 cd ~/.local/share/omarchy
-git pull
+# git pull
+git fetch upstream
 cd -
