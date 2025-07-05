@@ -3,5 +3,5 @@ yay -S --noconfirm --needed \
   imagemagick \
   mariadb-libs postgresql-libs \
   github-cli \
-  lazygit lazydocker \
+  lazygit lazydocker-bin \
   ctags
